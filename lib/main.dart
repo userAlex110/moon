@@ -47,71 +47,31 @@ class _HomeShellState extends State<HomeShell> {
       const FavoritesPage(),
     ];
 
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final bool wide = constraints.maxWidth >= 700;
-        if (wide) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(_selectedIndex == 0 ? '生成播客' : '收藏'),
-            ),
-            body: Row(
-              children: <Widget>[
-                NavigationRail(
-                  extended: true,
-                  selectedIndex: _selectedIndex,
-                  onDestinationSelected: (int index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                  destinations: const <NavigationRailDestination>[
-                    NavigationRailDestination(
-                      icon: Icon(Icons.podcasts_outlined),
-                      selectedIcon: Icon(Icons.podcasts),
-                      label: Text('生成'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.favorite_border),
-                      selectedIcon: Icon(Icons.favorite),
-                      label: Text('收藏'),
-                    ),
-                  ],
-                ),
-                const VerticalDivider(width: 1),
-                Expanded(child: pages[_selectedIndex]),
-              ],
-            ),
-          );
-        }
-
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(_selectedIndex == 0 ? '生成播客' : '收藏'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_selectedIndex == 0 ? '生成播客' : '收藏'),
+      ),
+      body: pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.podcasts_outlined),
+            activeIcon: Icon(Icons.podcasts),
+            label: '生成',
           ),
-          body: pages[_selectedIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _selectedIndex,
-            onTap: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.podcasts_outlined),
-                activeIcon: Icon(Icons.podcasts),
-                label: '生成',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border),
-                activeIcon: Icon(Icons.favorite),
-                label: '收藏',
-              ),
-            ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            activeIcon: Icon(Icons.favorite),
+            label: '收藏',
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
