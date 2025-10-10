@@ -38,6 +38,15 @@ dependencies:
   http: ^1.2.2
   just_audio: ^0.9.41
   
+  # 解析HTML内容（RSS文章正文多为HTML格式）
+  flutter_html: ^3.0.0-beta.2
+  # 处理HTML中的图片和链接
+  html: ^0.15.4
+  # 启动外部浏览器（打开原文链接）
+  url_launcher: ^6.2.3
+  # 存储收藏（用Hive轻量数据库）
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
